@@ -3,6 +3,7 @@ version: "alice/v1.26t7-v2.26t7"
 source: https://github.com/alisw/ampt
 requires:
  - "GCC-Toolchain:(?!osx)"
+ - HepMC
 ---
 #!/bin/bash -e
 
@@ -24,7 +25,7 @@ proc ModulesHelp { } {
 set version $PKGVERSION-@@PKGREVISION@$PKGHASH@@
 module-whatis "ALICE Modulefile for $PKGNAME $PKGVERSION-@@PKGREVISION@$PKGHASH@@"
 # Dependencies
-module load BASE/1.0
+module load BASE/1.0 ${HEPMC_VERSION:+HEPMC/$HEPMC_VERSION-$HEPMC_REVISION}
 # Our environment
 setenv AMPT_ROOT \$::env(BASEDIR)/$PKGNAME/\$version
 prepend-path PATH \$::env(AMPT_ROOT)/bin
