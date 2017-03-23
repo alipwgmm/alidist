@@ -1,5 +1,6 @@
 package: AMPT
-version: "alice/v1.26t7-v2.26t7"
+version: "%(tag_basename)s%(defaults_upper)s"
+tag: "alice/v1.26t7-v2.26t7"
 source: https://github.com/alisw/ampt
 requires:
  - "GCC-Toolchain:(?!osx)"
@@ -7,11 +8,11 @@ requires:
 ---
 #!/bin/bash -e
 
-rsync -a --exclude='**/.git' --delete --delete-excluded $SOURCEDIR/ ./
-make -j${JOBS}
-install -d $INSTALLROOT/bin
-install -t $INSTALLROOT/bin ampt
-install -t $INSTALLROOT/bin parser
+cmake  $SOURCEDIR                           \
+       -DCMAKE_INSTALL_PREFIX=$INSTALLROOT  \
+       ${HEPMC_VERSION:+-DHEPMC_ROOT=$HEPMC_ROOT}
+
+make ${JOBS+-j $JOBS} install
 
 # Modulefile
 MODULEDIR="$INSTALLROOT/etc/modulefiles"
