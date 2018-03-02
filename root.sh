@@ -104,6 +104,7 @@ else
         -Dbuiltin_pcre=ON                                                                \
         ${NO_PYTHON:+-Dpython=OFF}                                                       \
         ${ENABLE_COCOA:+-Dcocoa=ON}                                                      \
+        -DCMAKE_Fortran_COMPILER=gfortran                                                \
         -DCMAKE_CXX_COMPILER=$COMPILER_CXX                                               \
         -DCMAKE_C_COMPILER=$COMPILER_CC                                                  \
         -DCMAKE_Fortran_COMPILER=gfortran                                                \
